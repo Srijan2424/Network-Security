@@ -1,0 +1,15 @@
+Metadata-Version: 2.4
+Name: NetworkSecurity
+Version: 0.0.1
+Author: Srijan Chopra
+Author-email: srijan.chopra@gmail.com
+Requires-Dist: numpy
+Requires-Dist: panda
+Requires-Dist: python-dotenv
+Requires-Dist: pymongo
+Requires-Dist: certifi
+Requires-Dist: pymongo[srv]
+Requires-Dist: pymongo
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist
