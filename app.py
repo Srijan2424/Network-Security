@@ -31,7 +31,7 @@ from networksecurity.constant.training_pipeline import DATA_INGESTION_COLLECTION
 from networksecurity.constant.training_pipeline import DATA_INGESTION_DATABASE_NAME
 
 database=client[DATA_INGESTION_DATABASE_NAME]
-collection=database[DATA_INGESTION_DATABASE_NAME]
+collection=database[DATA_INGESTION_COLLECTION_NAME]
 
 app=FastAPI()
 origins=["*"]
@@ -68,7 +68,7 @@ async def predict_route(request:Request,file: UploadFile = File(...)):
         final_modle=load_object("final_model/model.pkl")
         network_model=NetworkModel(preprocessor=preprocessor,model=final_modle)
         print(df.iloc[0])
-        y_pred=network_model.predict(df)
+        y_pred=network_model.predict_(df)
         print(y_pred)
         df["predicted_column"]=y_pred
         print(df["predicted_column"])
@@ -84,5 +84,5 @@ async def predict_route(request:Request,file: UploadFile = File(...)):
 
 
 if __name__=="__main__":
-    app_run(app,host="loacalhost",port=8000)
+    app_run(app,host="localhost",port=8000)
     
