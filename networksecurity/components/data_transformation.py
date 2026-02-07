@@ -90,6 +90,11 @@ class DataTransformation:
             save_numpy_array_data(self.data_transformation_config.transformed_test_file_path,array=test_arr)
             save_object(self.data_transformation_config.transformed_object_file_path,preprocessor_object)
 
+            # saving all the required pickle files for runnning the model are saved to a single folder so that it becomes easier to work with it on cloud
+            # best model to be saved
+            save_object("final_model/preprocessor.pkl",preprocessor_object)
+            
+            
             # preparing artifacts
             data_transformation_artifact=DataTransformationArtifact(
                 transformed_object_file_path=self.data_transformation_config.transformed_object_file_path,
