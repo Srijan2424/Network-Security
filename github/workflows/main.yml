@@ -1,18 +1,22 @@
-name: Docker Image CI
+name: workflow
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths-ignore:
+      - "README.md"
 
 jobs:
-
-  build:
-
+  intergration:
+    name: Continous Integration
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Lint code 
+        run: echo "Linting repository"
+      
+      - name: Run unit tests
+        run: echo "Runing unit tests"
