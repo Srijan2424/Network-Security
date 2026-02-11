@@ -40,10 +40,16 @@ jobs:
         id: login-ecr 
         uses: aws-actions/amazon-ecr-login@v2
       
+      - name: Debug secrets
+        run: |
+          echo "AWS_REGION: ${{ secrets.AWS_REGION }}"
+          echo "ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}"
+          echo "Full registry/repo: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}"
+
       - name: Build, tag, and push image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: networksecurity  # ← your ECR repo name
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}  # ← your ECR repo name
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
