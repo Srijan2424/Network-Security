@@ -1,12 +1,16 @@
 FROM python:3.10-slim-buster
-# my working directory in docker
 WORKDIR /app
-# the directory in app folder in dockers will copy the all the contents of the project 
+
+# Copy files first
 COPY . /app
 
-# update evething (all the files) and download the awscli 
-RUN apt update -y && install awscli -y 
+# Install system dependencies (awscli)
+RUN apt-get update -y && \
+    apt-get install -y awscli && \
+    rm -rf /var/lib/apt/lists/*
 
-# update this and install requirements folder
-RUN apt-get upadte && pip install -r requirements.txt
-CMD ["pyhton3","app.py"]
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run your FastAPI app
+CMD ["python3", "app.py"]
