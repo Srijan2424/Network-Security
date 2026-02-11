@@ -43,7 +43,7 @@ jobs:
       - name: Debug secrets
         run: |
           echo "AWS_REGION: ${{ secrets.AWS_REGION }}"
-          echo "ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}"
+          echo "ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_NAME }}"
           echo "Full registry/repo: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}"
 
       - name: Build, tag, and push image
